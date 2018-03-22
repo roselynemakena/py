@@ -1,7 +1,8 @@
 # This is a quick cheatsheet of postgres commands that I have found useful over time.
 
 
-
+# Log in to postgres console
+sudo -u postgres psql
 
 # Create a pg database
 sudo -u postgres createdb <dbname>

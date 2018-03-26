@@ -59,7 +59,7 @@ class Department(db.model):
 
 	id = db.Column(db.Integer, primary = True) 
 	name = db.Column(db.String(100), unique = True)
-	description = db.Column(db.String(1000))
+	description = db.Column(db.String(300))
 	employees = db.relationship('Employee', backref = 'department', lazy='dynamic')
 
 
@@ -73,8 +73,8 @@ class Role(object):
 
 	id = db.Column(db.Integer, unique=True)
 	name = db.Column(db.String(100), unique = True)
-	description = db.Column(db.String(1000))
-	employees = db.relationship('Employee', backref = )
+	description = db.Column(db.String(300))
+	employees = db.relationship('Employee', backref = 'role', lazy = 'dynamic' )
 
 	def __repr__(self):
 		return 'Roles: {}'.format(self.name)

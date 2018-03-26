@@ -40,6 +40,44 @@ class Employee(UserMixin, db.model):
 		return check_password_hash(password_hash)
 	def __repr(self):
 
-		return '<Employee: {}'.format(self.username>
+		return '<Employee: {}'.format(self.username>)
+
+
+
+# User loader setup
+@lm.user_loader
+def load_user(user_id):
+	return Employee.query.get(int(user_id))
+
+class Department(db.model):
+	'''
+	Department table creation
+
+	'''
+
+	__tablename__ = 'departments'
+
+	id = db.Column(db.Integer, primary = True) 
+	name = db.Column(db.String(100), unique = True)
+	description = db.Column(db.String(1000))
+	employees = db.relationship('Employee', backref = 'department', lazy='dynamic')
+
+
+	def __repr__(self):
+		return 'Department: {}'.format(self.name)
+
+
+class Role(object):
+	
+	__tablename__ = 'roles'
+
+	id = db.Column(db.Integer, unique=True)
+	name = db.Column(db.String(100), unique = True)
+	description = db.Column(db.String(1000))
+	employees = db.relationship('Employee', backref = )
+
+	def __repr__(self):
+		return 'Roles: {}'.format(self.name)
+		
 
 

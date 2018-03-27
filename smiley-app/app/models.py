@@ -1,18 +1,18 @@
-from flask import UserMixin
+from flask_login import UserMixin
 from werkzeug import generate_password_hash,check_password_hash
 
 
 from app import db, lm
 
 
-class Employee(UserMixin, db.model):
+class Employee(UserMixin, db.Model):
 	'''
 		Employee table
 	'''
 
 	tablename = 'employees'
 
-	id = db.Column(db.Integer, primary=True)
+	id = db.Column(db.Integer, primary_key=True)
 	email = db.Column(db.String(60), index=True, unique=True)
 	first_name = db.Column(db.String(60), index=True, unique=True)
 	last_name = db.Column(db.String(60), index=True)
@@ -40,7 +40,7 @@ class Employee(UserMixin, db.model):
 		return check_password_hash(password_hash)
 	def __repr(self):
 
-		return '<Employee: {}'.format(self.username>)
+		return '<Employee: {}>'.format(self.username)
 
 
 
@@ -49,7 +49,7 @@ class Employee(UserMixin, db.model):
 def load_user(user_id):
 	return Employee.query.get(int(user_id))
 
-class Department(db.model):
+class Department(db.Model):
 	'''
 	Department table creation
 
@@ -57,14 +57,14 @@ class Department(db.model):
 
 	__tablename__ = 'departments'
 
-	id = db.Column(db.Integer, primary = True) 
+	id = db.Column(db.Integer, primary_key = True) 
 	name = db.Column(db.String(100), unique = True)
 	description = db.Column(db.String(300))
 	employees = db.relationship('Employee', backref = 'department', lazy='dynamic')
 
 
 	def __repr__(self):
-		return 'Department: {}'.format(self.name)
+		return 'Department: {}>'.format(self.name)
 
 
 class Role(object):
@@ -77,7 +77,7 @@ class Role(object):
 	employees = db.relationship('Employee', backref = 'role', lazy = 'dynamic' )
 
 	def __repr__(self):
-		return 'Roles: {}'.format(self.name)
+		return 'Roles: {}>'.format(self.name)
 		
 
 

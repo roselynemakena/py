@@ -10,6 +10,7 @@ class DevelopmentConfig(object):
 
 	DEBUG = True
 	SQLALCHEMY_ECHO  = True
+	SQLALCHEMY_TRACK_MODIFICATIONS = True
 
 
 class ProductionConfig(object):

@@ -67,17 +67,17 @@ class Department(db.Model):
 		return 'Department: {}>'.format(self.name)
 
 
-class Role(object):
+class Role(db.Model):
 	
 	__tablename__ = 'roles'
 
-	id = db.Column(db.Integer, unique=True)
+	id = db.Column(db.Integer, primary_key=True)
 	name = db.Column(db.String(100), unique = True)
 	description = db.Column(db.String(300))
 	employees = db.relationship('Employee', backref = 'role', lazy = 'dynamic' )
 
 	def __repr__(self):
-		return 'Roles: {}>'.format(self.name)
+		return 'Role: {}>'.format(self.name)
 		
 
 
